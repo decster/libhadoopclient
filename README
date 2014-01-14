@@ -1,0 +1,14 @@
+A pure native Hadoop client written in c++11
+
+Dependency
+==========
+Compiler and standard library with c++11 support
+protobuf
+sasl2
+
+Build
+=====
+cmake .
+make
+
+
