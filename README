@@ -3,12 +3,14 @@ A pure native Hadoop client written in c++11
 Dependency
 ==========
 Compiler and standard library with c++11 support
-protobuf
-sasl2
+google protobuf
+sasl
 
 Build
 =====
 cmake .
 make
+
+Not complete yet, currently only compile and runs on MacOSX
 
 
