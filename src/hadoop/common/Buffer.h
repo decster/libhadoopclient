@@ -19,7 +19,7 @@
 #ifndef BUFFER_H_
 #define BUFFER_H_
 
-#include "common.h"
+#include "Common.h"
 
 namespace google {
 namespace protobuf {
