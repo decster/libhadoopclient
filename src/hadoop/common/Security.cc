@@ -20,8 +20,6 @@
 #include "Security.pb.h"
 #include "Json.h"
 #include "Security.h"
-#include <sasl/sasl.h>
-#include <sasl/saslutil.h>
 
 namespace hadoop {
 namespace common {
