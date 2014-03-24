@@ -48,19 +48,19 @@ string Strings::ToString(uint32 v) {
 
 string Strings::ToString(int64 v) {
   char tmp[32];
-  snprintf(tmp, 32, "%lld", v);
+  snprintf(tmp, 32, "%lld", (long long)v);
   return tmp;
 }
 
 string Strings::ToString(int64 v, char pad, int64 len) {
   char tmp[32];
-  snprintf(tmp, 32, "%%%c%lldlld", pad, len);
+  snprintf(tmp, 32, "%%%c%lldlld", pad, (long long)len);
   return Format(tmp, v);
 }
 
 string Strings::ToString(uint64 v) {
   char tmp[32];
-  snprintf(tmp, 32, "%llu", v);
+  snprintf(tmp, 32, "%llu", (unsigned long long)v);
   return tmp;
 }
 
@@ -509,7 +509,7 @@ void Log::LogMessage(LogLevel level, const char * fmt, ...) {
                     log_tm.tm_min,
                     log_tm.tm_sec,
                     (int32_t)(log_timer.tv_usec / 1000),
-                    (uint64_t)pthread_self(),
+                    (unsigned long long)pthread_self(),
                     gLogLevels[level]);
   int rest = BUFFSIZE - len1;
   va_list al;
