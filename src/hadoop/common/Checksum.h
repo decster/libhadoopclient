@@ -19,10 +19,7 @@
 #ifndef CHECKSUM_H_
 #define CHECKSUM_H_
 
-#include <stddef.h>
-#include <stdint.h>
-#include <sys/types.h>
-#include <algorithm>
+#include "Common.h"
 
 namespace hadoop {
 namespace common {
@@ -77,13 +74,13 @@ public:
   bool validateOne(const char * data, uint64_t length, const char * checksum) const {
     uint32_t cs = init(_type);
     update(_type, cs, data, length);
-    return *((uint32_t*)checksum) == ntohl(getValue(_type, cs));
+    return *((uint32_t*)checksum) == HToBe(getValue(_type, cs));
   }
 
   void checksumOne(const char * data, uint64_t length, char * checksum) const {
     uint32_t cs = init(_type);
     update(_type, cs, data, length);
-    *((uint32_t*)checksum) = ntohl(getValue(_type, cs));
+    *((uint32_t*)checksum) = HToBe(getValue(_type, cs));
   }
 
   /**

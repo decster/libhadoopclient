@@ -17,6 +17,7 @@
  */
 
 #include <sys/time.h>
+#include <time.h>
 #include <stdarg.h>
 #include <errno.h>
 #include <execinfo.h>
@@ -379,12 +380,12 @@ int64 Time::CurrentTimeNano() {
 
 #else
 
-int64 CurrentMonoNano() {
+int64 Time::CurrentMonoNano() {
   timespec ts;
   clock_gettime(CLOCK_MONOTONIC, &ts);
   return 1000000000 * ts.tv_sec + ts.tv_nsec;
 }
-int64 CurrentTimeNano() {
+int64 Time::CurrentTimeNano() {
   timespec ts;
   clock_gettime(CLOCK_REALTIME, &ts);
   return 1000000000 * ts.tv_sec + ts.tv_nsec;

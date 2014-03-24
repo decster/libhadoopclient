@@ -154,12 +154,9 @@ public:
   uint64 spaceQuota;
 
   ContentSummary(uint64 length, uint64 fileCount, uint64 directoryCount,
-                 uint64 quota, uint64 spaceConsumed, uint64 spaceQuota) :
-      length(length), fileCount(fileCount), directoryCount(directoryCount),
-      quota(quota), spaceConsumed(spaceConsumed), spaceQuota(spaceQuota) {
-  }
+      uint64 quota, uint64 spaceConsumed, uint64 spaceQuota);
+  ContentSummary();
 
-  ContentSummary() : ContentSummary(0, 0, 0, 0, 0, 0) {}
   string toString() const;
 
   Json toJson() const;

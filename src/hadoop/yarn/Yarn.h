@@ -19,8 +19,8 @@
 #ifndef YARN_H_
 #define YARN_H_
 
-#include "hadoop/common/common.h"
-#include "hadoop/common/security.h"
+#include "hadoop/common/Common.h"
+#include "hadoop/common/Security.h"
 
 namespace hadoop {
 namespace yarn {

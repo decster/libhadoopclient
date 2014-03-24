@@ -20,7 +20,7 @@
 #include <execinfo.h>
 #include <string>
 #include "gtest/gtest.h"
-#include "hadoop/common/common.h"
+#include "hadoop/common/Common.h"
 
 using std::string;
 

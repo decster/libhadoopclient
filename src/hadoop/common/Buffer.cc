@@ -24,7 +24,7 @@
 #include <cstring>
 
 #include "google/protobuf/message_lite.h"
-#include "exceptions.h"
+#include "Exceptions.h"
 
 
 namespace hadoop {

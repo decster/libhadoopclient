@@ -85,6 +85,17 @@ void FileStatus::fromJson(Json & json) {
   // TODO:
 }
 
+ContentSummary::ContentSummary(uint64 length, uint64 fileCount,
+    uint64 directoryCount, uint64 quota, uint64 spaceConsumed,
+    uint64 spaceQuota) :
+    length(length), fileCount(fileCount), directoryCount(directoryCount),
+    quota(quota), spaceConsumed(spaceConsumed), spaceQuota(spaceQuota) {
+}
+
+ContentSummary::ContentSummary() :
+    length(0), fileCount(0), directoryCount(0),
+    quota(0), spaceConsumed(0), spaceQuota(0) {
+}
 
 string ContentSummary::toString() const {
   // quota can be -1 to indicate unlimited quota

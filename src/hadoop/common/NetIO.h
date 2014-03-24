@@ -160,6 +160,12 @@ const int16 EVENT_ALL = EVENT_READ | EVENT_WRITE | EVENT_CLOSE | EVENT_ERROR;
 
 string EventToString(int16 event);
 
+
+
+//#ifdef __MACH__
+#define _HADOOP_USE_POLL_
+//#endif
+
 /**
  * An IO multiplex poller, using poll and pipe on macosx,
  * using epoll and eventfd on linux
@@ -177,7 +183,7 @@ public:
   int16 poll(int32 timeoutMs);
   void wakeup();
 private:
-#ifdef __MACH__ // macosx using poll
+#ifdef _HADOOP_USE_POLL_ // macosx using poll
   pollfd _polls[2];
   int _wakefd[2];
 #else // linux using epoll

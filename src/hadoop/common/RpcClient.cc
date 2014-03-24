@@ -16,8 +16,6 @@
  * limitations under the License.
  */
 
-#include <boost/uuid/uuid.hpp>
-#include <boost/uuid/random_generator.hpp>
 #include <random>
 #include "ProtobufRpcEngine.pb.h"
 #include "IpcConnectionContext.pb.h"

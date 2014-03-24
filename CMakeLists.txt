@@ -11,7 +11,7 @@ if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 else (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
   set(CMAKE_CXX_COMPILER "g++")
   set(CMAKE_C_COMPILER "gcc")
-  set(CMAKE_CXX_COMPILER_ARG1 "-std=c++11 ")
+  set(CMAKE_CXX_COMPILER_ARG1 "-std=c++0x ")
 endif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 
 set(CMAKE_CXX_FLAGS "-g ")
@@ -35,7 +35,13 @@ add_definitions(-DHADOOP_CLIENT_INTERNAL)
 
 file(GLOB_RECURSE LIB_SOURCES protos/*.cc src/*.cc)
 add_library(hadoopclient SHARED ${LIB_SOURCES})
-target_link_libraries(hadoopclient ${PROTOBUF_LIBRARY} ${JSONC_LIBRARY})
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  target_link_libraries(hadoopclient ${PROTOBUF_LIBRARY} ${JSONC_LIBRARY})
+else (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+  target_link_libraries(hadoopclient ${PROTOBUF_LIBRARY} ${JSONC_LIBRARY} -lrt)
+endif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+
 
 file(GLOB_RECURSE TEST_SOURCES test/*.cc depends/gtest/gtest-all.cc)
 add_executable(testhadoopclient ${TEST_SOURCES})

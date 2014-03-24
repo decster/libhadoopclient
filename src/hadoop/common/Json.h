@@ -19,7 +19,7 @@
 #ifndef JSON_H_
 #define JSON_H_
 
-#include "json/json.h"
+#include "json-c/json.h"
 #include "Common.h"
 
 namespace hadoop {

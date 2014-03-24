@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-#include "common.h"
+#include "Common.h"
 #include "Exceptions.h"
 
 namespace hadoop {
@@ -134,6 +134,30 @@ Exception::Exception(Type type, const char * where,
     _stackTrace = where;
     _stackTrace.append("\n");
   }
+  Thread::AddStackTrace(_stackTrace);
+  if (GLogException || getenv("DEBUG")) {
+    LOG_WARN("%s(%s) thrown at:\n%s",
+        TypeToString(_type), _reason.c_str(), _stackTrace.c_str());
+  }
+}
+
+Exception::Exception(const char * where, const string & what) {
+  _type = UnknownException;
+  _reason = what;
+  if (where != nullptr) {
+    _stackTrace = where;
+    _stackTrace.append("\n");
+  }
+  Thread::AddStackTrace(_stackTrace);
+  if (GLogException || getenv("DEBUG")) {
+    LOG_WARN("%s(%s) thrown at:\n%s",
+        TypeToString(_type), _reason.c_str(), _stackTrace.c_str());
+  }
+}
+
+Exception::Exception(const string & what) {
+  _type = UnknownException;
+  _reason = what;
   Thread::AddStackTrace(_stackTrace);
   if (GLogException || getenv("DEBUG")) {
     LOG_WARN("%s(%s) thrown at:\n%s",

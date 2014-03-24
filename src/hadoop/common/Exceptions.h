@@ -61,12 +61,8 @@ protected:
 
 public:
   Exception(Type type, const char * where, const string & what);
-  Exception(const char * where, const string & what) :
-      Exception(UnknownException, where, what) {
-  }
-  Exception(const string & what) :
-      Exception(UnknownException, NULL, what) {
-  }
+  Exception(const char * where, const string & what);
+  Exception(const string & what);
   virtual ~Exception() throw () {
   }
 

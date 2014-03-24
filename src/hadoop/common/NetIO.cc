@@ -208,7 +208,7 @@ void NetUtil::tcpNoDelay(int fd, bool noDelay) {
 
 void NetUtil::tcpKeepAlive(int fd, bool keepAlive) {
   int op = keepAlive ? 1 : 0;
-  setsockopt(fd, IPPROTO_TCP, TCP_KEEPALIVE, &op, sizeof(op));
+  setsockopt(fd, SOL_SOCKET, SO_KEEPALIVE, &op, sizeof(op));
 }
 
 void NetUtil::tcpSendBuffer(int fd, uint32 size) {
@@ -265,8 +265,7 @@ string EventToString(int16 event) {
 }
 
 
-#ifdef __MACH__ // macosx using poll
-
+#ifdef _HADOOP_USE_POLL_ // macosx using poll
 
 Poller::Poller(int fd) {
   if (pipe(_wakefd) != 0) {
@@ -345,7 +344,7 @@ int16 Poller::poll(int32 timeout) {
 
 void Poller::wakeup() {
   int64_t event = 1;
-  write(_wakefd[1], (void*)&event, sizeof(event));
+  ::write(_wakefd[1], (void*)&event, sizeof(event));
 }
 
 #else // linux using epoll & eventfd

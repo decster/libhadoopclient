@@ -22,7 +22,7 @@
 #include "yarn_protos.pb.h"
 #include "yarn_service_protos.pb.h"
 #include "hadoop/common/RpcClient.h"
-#include "yarn.h"
+#include "Yarn.h"
 
 namespace hadoop {
 namespace yarn {

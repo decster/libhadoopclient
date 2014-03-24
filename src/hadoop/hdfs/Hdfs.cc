@@ -365,15 +365,24 @@ bool HdfsClient::checkAndRenewLease() {
 
 HdfsClient::HdfsClient(const User & user, const string & addr,
     const char * namePrefix) :
-    _namenode(NULL) {
-  _namenode = new ClientNamenodeProtocol(user, addr);
+    _namenode(new ClientNamenodeProtocol(user, addr)) {
   _clientName = Strings::Format("NativeHdfsClient_%s_%u_%llu", namePrefix,
       Random::NextUInt32(), Thread::CurrentId());
   _renewLeaseContext.reset(new RenewLeaseContext(_clientName, getTimeout()/2));
 }
 
+HdfsClient::HdfsClient(const User & user, const string & addr) :
+    _namenode(new ClientNamenodeProtocol(user, addr)) {
+  _clientName = Strings::Format("NativeHdfsClient_%s_%u_%llu", "NONMAPREDUCE",
+      Random::NextUInt32(), Thread::CurrentId());
+  _renewLeaseContext.reset(new RenewLeaseContext(_clientName, getTimeout()/2));
+}
+
 HdfsClient::HdfsClient(const string & addr) :
-    HdfsClient(User::GetLoginUser(), addr) {
+    _namenode(new ClientNamenodeProtocol(User::GetLoginUser(), addr)) {
+  _clientName = Strings::Format("NativeHdfsClient_%s_%u_%llu", "NONMAPREDUCE",
+      Random::NextUInt32(), Thread::CurrentId());
+  _renewLeaseContext.reset(new RenewLeaseContext(_clientName, getTimeout()/2));
 }
 
 HdfsClient::~HdfsClient() {

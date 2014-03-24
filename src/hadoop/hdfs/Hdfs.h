@@ -250,7 +250,9 @@ private:
 
 public:
   HdfsClient(const User & user, const string & addr,
-      const char * namePrefix = "NONMAPREDUCE");
+      const char * namePrefix);
+
+  HdfsClient(const User & user, const string & addr);
 
   HdfsClient(const string & addr);
 
