@@ -39,6 +39,7 @@ void SockAddr::parse(const string & addr) {
   if (pos == string::npos) {
     ip.clear();
     port = 0;
+    return;
   }
   ip = addr.substr(0, pos);
   port = Strings::toInt(addr.substr(pos + 1));
